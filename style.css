@@ -1,0 +1,94 @@
+:root {
+    --lighter-pink: #fff0f3;
+    --lock-bg: #fff5f7;
+    --muted-rose: #d4a5b0; /* Less bright pink, more of a dusty rose pastel */
+    --accent: #ff85a1;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle, var(--lighter-pink) 0%, #e8d5d8 100%);
+    font-family: 'Quicksand', sans-serif;
+    overflow: hidden;
+}
+
+/* LOCK SCREEN (Kept Colored Box Style) */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.98);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lock-box {
+    text-align: center;
+    background: var(--lock-bg);
+    padding: 40px;
+    border-radius: 40px;
+    box-shadow: 0 20px 60px rgba(240, 141, 165, 0.3);
+    border: 4px double var(--muted-rose);
+    max-width: 320px;
+}
+
+/* BOOK SCENE */
+.scene { perspective: 2000px; display: flex; justify-content: center; align-items: center; width: 100vw; height: 100vh; }
+.book { width: 340px; height: 500px; position: relative; transform-style: preserve-3d; box-shadow: 0 30px 60px rgba(0,0,0,0.2); }
+
+.inner-page {
+    position: absolute; width: 100%; height: 100%;
+    background: white; border-radius: 2px 15px 15px 2px;
+    padding: 30px; box-sizing: border-box;
+    transform-origin: left; transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    backface-visibility: hidden; border: 1px solid #eee;
+}
+
+/* Page Layers */
+.page-three { z-index: 1; background: #fffdfa; }
+.page-two { z-index: 2; }
+.page-one { z-index: 3; }
+
+/* THE COVER */
+.cover { z-index: 4; position: absolute; width: 100%; height: 100%; transform-origin: left; transition: transform 1.2s; transform-style: preserve-3d; }
+.cover-front {
+    background: var(--muted-rose);
+    border: 8px solid pink; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 5px 15px 15px 5px; color: white; text-align: center;
+}
+
+.cover-border { border: 2px solid rgba(255,255,255,0.4); padding: 15px; height: 85%; width: 85%; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+
+/* LETTER STYLE */
+.letter-container { height: 100%; font-size: 0.8rem; line-height: 1.5; color: #000000; display: flex; flex-direction: column; justify-content: center; }
+.signature { text-align: right; margin-top: 06px; font-size: 0.7rem; cursive;font-weight: 800; color: #c00096; }
+.signature .name { text-align: right,font-size: 0.5rem; cursive; display: block; }
+
+/* FLIP CLASSES */
+.book.flip-1 .cover { transform: rotateY(-145deg); }
+.book.flip-2 .page-one { transform: rotateY(-138deg); }
+.book.flip-3 .page-two { transform: rotateY(-130deg); }
+
+/* ELEMENTS */
+.page-content { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.quote-title, .thank-you-title { font-weight: 700; color: var(--accent); font-size: 1.8rem; margin: 10px 0; }
+.bouquet-gif { width: 180px; }
+.hidden { display: none; }
+
+/* FEEDBACK MESSAGES */
+.feedback-msg { margin-top: 15px; font-weight: 600; display: none; }
+#errorMsg { color: #e74c3c; }
+.success { color: #2ecc71; font-size: 1.2rem; }
+
+/* MOVING HEART BACKGROUND */
+.heart { position: fixed; color: var(--accent); font-size: 20px; animation: floatUp 5s linear forwards; z-index: -1; }
+@keyframes floatUp { 0% { transform: translateY(110vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; } }
+
+.tap-indicator { margin-top: 20px; font-size: 0.7rem; animation: blink 2s infinite; font-weight: 700; }
+@keyframes blink { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
